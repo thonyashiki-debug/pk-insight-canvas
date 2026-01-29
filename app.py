@@ -33,7 +33,7 @@ if generate_btn:
         st.error("APIキーを入力してください")
     else:
         genai.configure(api_key=api_key)
-       model = genai.GenerativeModel('gemini-3-flash')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         
         with st.spinner("PKの知見を統合して戦略を練っています..."):
             prompt = f"""
