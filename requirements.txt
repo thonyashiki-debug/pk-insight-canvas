@@ -1,1 +1,2 @@
 google-generativeai
+Pillow # 画像処理ライブラリ
