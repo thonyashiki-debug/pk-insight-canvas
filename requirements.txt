@@ -1,2 +1,3 @@
-google-generativeai
-Pillow # 画像処理ライブラリ
+streamlit
+google-genai
+Pillow
