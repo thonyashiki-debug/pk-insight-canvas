@@ -32,7 +32,7 @@ def create_pptx(strategy_text, client_name, product_name):
     return ppt_io.getvalue()
 
 # --- UI ---
-st.title("🚀 PK-Insight Canvas v0.2 (Stable)")
+st.title("🚀 PK-Insight Canvas v0.2.1 (Ultra Stable)")
 
 with st.sidebar:
     st.header("⚙️ Settings")
@@ -51,12 +51,12 @@ if generate_btn:
         try:
             client = genai.Client(api_key=api_key)
             
-            # ステップ1: 戦略テキストの生成（1.5 Flashを使用）
-            with st.spinner("戦略ロジックを構築中..."):
+            # ステップ1: 戦略テキストの生成
+            # 404エラーを避けつつ、429制限も緩い 'gemini-2.0-flash-lite' を採用
+            with st.spinner("最新の軽量モデルで戦略を構築中..."):
                 text_prompt = f"{client_name}の{product_name}に関する上申用戦略(1-8の項目)を作成してください。ターゲットは{target_user}、要望は{feedback}です。"
-                # 無料枠の制限が緩い gemini-1.5-flash を指定
                 text_response = client.models.generate_content(
-                    model="gemini-1.5-flash", 
+                    model="gemini-2.0-flash-lite", 
                     contents=text_prompt
                 )
                 strategy_text = text_response.text
@@ -78,4 +78,4 @@ if generate_btn:
 
         except Exception as e:
             st.error(f"エラーが発生しました: {e}")
-            st.info("数十秒待ってから再度お試しいただくか、APIキーの制限を確認してください。")
+            st.info("もし429エラーが出る場合は、1分ほど待ってから再度お試しください。")
